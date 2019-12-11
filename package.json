@@ -1,0 +1,29 @@
+{
+  "name": "discord-deathroll",
+  "version": "0.0.1",
+  "description": "Deathroll bot for Discord",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spurux/discord-deathroll.git"
+  },
+  "author": "Spurux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Spurux/discord-deathroll/issues"
+  },
+  "homepage": "https://github.com/Spurux/discord-deathroll#readme",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.3"
+  },
+  "dependencies": {
+    "@types/node": "^12.12.17",
+    "discord.js": "^11.5.1"
+  }
+}
