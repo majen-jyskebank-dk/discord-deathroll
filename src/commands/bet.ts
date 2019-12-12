@@ -22,7 +22,7 @@ export class Bet implements ICommand {
 
         if (betAmount <= 1)  {
             message.channel.send(`${message.author.toString()}, amount to small to bet.`);
-            return
+            return;
         }
 
         let channel = await ChannelController.FindOrCreate({ channelId: message.channel.id });

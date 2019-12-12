@@ -74,7 +74,7 @@ export class Roll implements ICommand {
 
             await ChannelController.UnsetGame({ channelId: channel.channelId });
 
-            message.channel.send(`${channel.currentGame.nextPlayer.userTag} has won ${channel.currentGame.bet * 2}!`);
+            message.channel.send(`${channel.currentGame.nextPlayer.userTag} has won ${channel.currentGame.bet * 2} gold!`);
             return;
         }
 
