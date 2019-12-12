@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/Spurux/discord-deathroll#readme",
   "devDependencies": {
+    "@types/mongoose": "^5.5.34",
     "jest": "^24.9.0",
     "tslint": "^5.20.1",
     "typescript": "^3.7.3"
   },
   "dependencies": {
     "@types/node": "^12.12.17",
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "mongoose": "^5.8.0"
   }
 }

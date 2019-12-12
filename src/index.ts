@@ -1,11 +1,13 @@
-import { ICommand } from './command';
+import { ICommand } from './interfaces/command.interface';
+import mongoose from 'mongoose';
 import * as Discord from 'discord.js';
 import * as path from 'path';
 import * as fs from 'fs';
 
+let db: mongoose.Connection;
 const client = new Discord.Client();
+const dbPath = 'mongodb://localhost/discord-deathroll';
 const commands = new Map<string, ICommand>();
-
 const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter((file) => file.endsWith('.js'));
 
 commandFiles.forEach((file, index) => {
@@ -27,12 +29,29 @@ commandFiles.forEach((file, index) => {
     });
 });
 
+mongoose.connect(dbPath, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+});
+
+db = mongoose.connection;
+
+db.on('error', () => {
+    console.log('Error occurred from MongoDB');
+});
+
+db.on('open', () => {
+    console.log('Successfully connected to database!');
+});
+
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag} - ready!`);
+    console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('commandsLoaded', () => {
-    console.log('All commands loaded');
+    console.log('All commands loaded!');
 });
 
 client.on('message', (message) => {

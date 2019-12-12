@@ -1,4 +1,4 @@
-import { ICommand } from '../command';
+import { ICommand } from '../interfaces/command.interface';
 import { Message } from 'discord.js';
 
 export class Roll implements ICommand {
