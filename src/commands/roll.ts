@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 
 export class Roll implements ICommand {
     public name = 'roll';
-    public description = 'lol';
+    public description = 'Rolls a dice with a specified amount of eyes. E.g. !roll 20';
 
     public execute(message: Message, args: any): void {
         if (args.length !== 1) {
@@ -19,8 +19,4 @@ export class Roll implements ICommand {
         const roll = Math.floor((Math.random() * (+args[0])) + 1);
         message.channel.send(`${message.author.toString()} rolled a ${roll}`);
     }
-}
-
-export function getCommand(): Roll {
-    return new Roll();
 }
