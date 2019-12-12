@@ -25,7 +25,11 @@ async function Create({ nextPlayer, bet }: ICreateGame): Promise<IGame> {
 }
 
 async function SetCurrentPlayer({ gameId, user }: ISetCurrentPlayer): Promise<IGame> {
-    const result =  await Game.findOneAndUpdate({ _id: gameId }, { currentPlayer: user.id }, { new: true })
+    const result =  await Game.findOneAndUpdate({ _id: gameId },
+        {
+            currentPlayer: user.id,
+            updated: new Date().getTime(),
+        }, { new: true })
         .populate('currentPlayer')
         .populate('nextPlayer')
         .exec();
@@ -44,6 +48,7 @@ async function FinishRoll({ gameId, roll }: IFinishRoll) {
             currentPlayer: newCurrent,
             nextPlayer: newNext,
             previousRoll: roll,
+            updated: new Date().getTime(),
         },
         { new: true});
 }
