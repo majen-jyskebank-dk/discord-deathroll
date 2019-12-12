@@ -18,7 +18,12 @@ export class Bet implements ICommand {
             return;
         }
 
-        const betAmount = +args[0];
+        const betAmount = Math.floor(+args[0]);
+
+        if (betAmount <= 1)  {
+            message.channel.send(`${message.author.toString()}, amount to small to bet.`);
+        }
+
         const user = await UserController.FindOrCreate({ userId: message.author.id });
         let channel = await ChannelController.FindOrCreate({ channelId: message.channel.id });
 
@@ -26,9 +31,14 @@ export class Bet implements ICommand {
             const tillTimeout: number = 300000 - (new Date().getTime() - channel.currentGame.updated.getTime());
 
             if (tillTimeout > 0) {
-                message.channel.send(`Looks like a game is already under way. Let the other players finish, or wait for the game to time out (time out in ${Math.floor(tillTimeout / 1000)} seconds)`);
+                message.channel.send(`Looks like a game is already under way. Let the other players finish, or wait for the game to time out (time out in ${Math.floor(tillTimeout / 1000)} seconds).`);
                 return;
             }
+        }
+
+        if (user.gold < betAmount) {
+            message.channel.send(`${message.author.toString()}, you don't have enough gold to place a bet of ${betAmount}. Do !bank to check how much gold you have.`);
+            return;
         }
 
         const game = await GameController.Create({ betBy: user, bet: +args[0] });
