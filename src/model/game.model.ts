@@ -2,26 +2,20 @@ import mongoose, { Schema, Document } from 'mongoose';
 import { IUser } from './user.model';
 
 export interface IGame extends Document {
-    betBy: IUser;
-    acceptedBy: IUser;
     currentPlayer: IUser;
+    nextPlayer: IUser;
     previousRoll: number;
     bet: number;
     updated: Date;
 }
 
 const GameSchema: Schema = new Schema({
-    betBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
-    acceptedBy: {
+    currentPlayer: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         default: null,
     },
-    currentPlayer: {
+    nextPlayer: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         default: null,

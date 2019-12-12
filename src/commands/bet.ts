@@ -9,12 +9,12 @@ export class Bet implements ICommand {
     public description: 'Bets a given amount. First to reply with /roll accepts and plays agains better. E.g. !bet 500';
     public async execute(message: Message, args: any) {
         if (args.length !== 1) {
-            message.channel.send(`Expected 1 argument, got ${args.length}`);
+            message.channel.send(`Expected 1 argument, got ${args.length}.`);
             return;
         }
 
         if (isNaN(+args[0])) {
-            message.channel.send('Argument is not a number');
+            message.channel.send('Argument is not a number.');
             return;
         }
 
@@ -22,11 +22,10 @@ export class Bet implements ICommand {
 
         if (betAmount <= 1)  {
             message.channel.send(`${message.author.toString()}, amount to small to bet.`);
+            return
         }
 
-        const user = await UserController.FindOrCreate({ userId: message.author.id });
         let channel = await ChannelController.FindOrCreate({ channelId: message.channel.id });
-
         if (channel.currentGame != null) {
             const tillTimeout: number = 300000 - (new Date().getTime() - channel.currentGame.updated.getTime());
 
@@ -36,14 +35,19 @@ export class Bet implements ICommand {
             }
         }
 
+        const user = await UserController.FindOrCreate({
+            userId: message.author.id,
+            userTag: message.author.toString(),
+        });
+
         if (user.gold < betAmount) {
             message.channel.send(`${message.author.toString()}, you don't have enough gold to place a bet of ${betAmount}. Do !bank to check how much gold you have.`);
             return;
         }
 
-        const game = await GameController.Create({ betBy: user, bet: +args[0] });
+        const game = await GameController.Create({ nextPlayer: user, bet: +args[0] });
         channel = await ChannelController.SetGame({ channelId: channel.channelId, currentGame: game });
 
-        message.channel.send(`${message.author.toString()} placed a bet of ${betAmount}. Will anyone accept?`);
+        message.channel.send(`${message.author.toString()} placed a bet of ${betAmount}. Do !roll to accept.`);
     }
 }
