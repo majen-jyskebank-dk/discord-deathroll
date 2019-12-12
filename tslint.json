@@ -9,7 +9,8 @@
         "object-literal-sort-keys": false,
         "ordered-imports": false,
         "quotemark": [true, "single", "jsx-single"],
-        "no-var-requires": false
+        "no-var-requires": false,
+        "max-classes-per-file": false
     },
     "rulesDirectory": []
 }

@@ -1,10 +1,10 @@
-import { Command } from './command';
+import { ICommand } from './command';
 import * as Discord from 'discord.js';
 import * as path from 'path';
 import * as fs from 'fs';
 
 const client = new Discord.Client();
-const commands = new Map<string, Command>();
+const commands = new Map<string, ICommand>();
 
 const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter((file) => file.endsWith('.js'));
 
@@ -16,7 +16,7 @@ commandFiles.forEach((file, index) => {
             commandKey = key;
         });
 
-        const commandInstance: Command = Object.create(new command[commandKey]());
+        const commandInstance: ICommand = Object.create(new command[commandKey]());
 
         commands.set(commandInstance.name, commandInstance);
         console.log(`Loaded command: ${commandInstance.name}`);
