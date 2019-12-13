@@ -9,12 +9,12 @@ export class Bet implements ICommand {
     public description: 'Bets a given amount. First to reply with /roll accepts and plays agains better. E.g. !bet 500';
     public async execute(message: Message, args: any) {
         if (args.length !== 1) {
-            message.channel.send(`Expected 1 argument, got ${args.length}.`);
+            message.channel.send(`Please specify how much gold you want to bet (got ${args.length} arguments, expected 1).`);
             return;
         }
 
         if (isNaN(+args[0])) {
-            message.channel.send('Argument is not a number.');
+            message.channel.send(`Please specify how much gold you want to bet (${args[0]} is not a number).`);
             return;
         }
 

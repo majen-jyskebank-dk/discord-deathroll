@@ -6,7 +6,7 @@ import GameController from '../controllers/game.controller';
 
 export class Roll implements ICommand {
     public name = 'roll';
-    public description = 'Rolls a dice with a specified amount of eyes. E.g. !roll 20';
+    public description = 'Throw your dice. E.g. !roll';
 
     public async execute(message: Message, args: any) {
         const channel = await ChannelController.FindOrCreate({ channelId: message.channel.id });
