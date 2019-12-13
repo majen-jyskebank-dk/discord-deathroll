@@ -14,7 +14,7 @@ export class Bet implements ICommand {
         }
 
         if (isNaN(+args[0])) {
-            message.channel.send(`Please specify how much gold you want to bet (${args[0]} is not a number).`);
+            message.channel.send(`Please specify how much gold you want to bet (${args[0]} is not a valid number).`);
             return;
         }
 
@@ -45,7 +45,7 @@ export class Bet implements ICommand {
             return;
         }
 
-        const game = await GameController.Create({ nextPlayer: user, bet: +args[0] });
+        const game = await GameController.Create({ nextPlayer: user, bet: betAmount });
         channel = await ChannelController.SetGame({ channelId: channel.channelId, currentGame: game });
 
         message.channel.send(`${message.author.toString()} placed a bet of ${betAmount}. Do !roll to accept.`);
