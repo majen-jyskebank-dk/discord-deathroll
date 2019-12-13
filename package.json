@@ -1,6 +1,6 @@
 {
   "name": "discord-deathroll",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deathroll bot for Discord",
   "main": "dist/index.js",
   "scripts": {
