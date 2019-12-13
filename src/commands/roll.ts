@@ -67,8 +67,8 @@ export class Roll implements ICommand {
 
         if (roll === 1) {
             UserController.GivePrice({
-                winnerId: channel.currentGame.nextPlayer.id,
-                looserId: channel.currentGame.currentPlayer.id,
+                winnerId: channel.currentGame.nextPlayer.userId,
+                looserId: channel.currentGame.currentPlayer.userId,
                 gold: channel.currentGame.bet * 2,
             });
 
