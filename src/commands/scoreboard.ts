@@ -11,7 +11,7 @@ export class Scoreboard implements ICommand {
         let scoreString = '```---------- Scoreboard ----------\n';
 
         users.forEach((user, index) => {
-            scoreString += `${index + 1}. ${user.userName}    ${user.gold} gold    Wins: ${user.won}    Loses: ${user.lost}`;
+            scoreString += `${index + 1}. ${user.userName}    ${user.gold} gold    Wins: ${user.won}    Loses: ${user.lost}${index + 1 !== users.length ? '\n' : ''}`;
         });
 
         scoreString += '```';
