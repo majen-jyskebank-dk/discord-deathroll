@@ -43,7 +43,7 @@ async function SetGold({ userId, gold }: ISetGold): Promise<IUser> {
 
 async function GivePrice({ winnerId, looserId, gold }: IGivePrice): Promise<any> {
     await User.findOneAndUpdate({ userId: winnerId }, { $inc: { gold, won: 1 } }, { new: true });
-    await User.findOneAndUpdate({ userId: looserId }, { $inc: { lost: -1 } });
+    await User.findOneAndUpdate({ userId: looserId }, { $inc: { lost: 1 } });
 }
 
 async function GiveUsersGold({ condition, gold }: IGiveUsersGold): Promise<any> {
