@@ -19,7 +19,7 @@ async function Create({ nextPlayer, bet }: ICreateGame): Promise<IGame> {
     return await Game.create({
         nextPlayer,
         bet,
-        previousRoll: bet,
+        previousRoll: bet * 10,
         updated: new Date().getTime(),
     });
 }
