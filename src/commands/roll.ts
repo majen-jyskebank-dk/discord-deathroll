@@ -18,6 +18,7 @@ export class Roll implements ICommand {
         const foundUser = await UserController.FindOrCreate({
             userId: message.author.id,
             userTag: message.author.toString(),
+            userName: message.author.username,
         });
         if (channel.currentGame.currentPlayer == null) {
             if (channel.currentGame.nextPlayer.userId === foundUser.userId) {
@@ -65,9 +66,10 @@ export class Roll implements ICommand {
         message.channel.send(`${message.author.toString()} rolled a ${roll}.`);
 
         if (roll === 1) {
-            UserController.SetGold({
-                userId: channel.currentGame.nextPlayer.userId,
-                gold: channel.currentGame.nextPlayer.gold + (channel.currentGame.bet * 2),
+            UserController.GivePrice({
+                winnerId: channel.currentGame.nextPlayer.id,
+                looserId: channel.currentGame.currentPlayer.id,
+                gold: channel.currentGame.bet * 2,
             });
 
             await ChannelController.UnsetGame({ channelId: channel.channelId });
