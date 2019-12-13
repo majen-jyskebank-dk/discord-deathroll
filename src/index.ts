@@ -57,6 +57,10 @@ client.on('commandsLoaded', () => {
 });
 
 client.on('message', (message) => {
+    if (!message.content.startsWith('!')) {
+        return;
+    }
+
     const args = message.content.slice(1).split(/ +/);
     const command = args.shift().toLowerCase();
 
@@ -65,9 +69,8 @@ client.on('message', (message) => {
     }
 });
 
-schedule.scheduleJob('0 * * * *', () => {
-    UserContoller.GiveAllUsersGold({ gold: 50 });
-    console.log('Gave all active users their hourly gold.');
+schedule.scheduleJob('0 * * * * *', () => {
+    UserContoller.GiveUsersGold({ condition: { gold: { $lt: 500 } }, gold: 10 });
 });
 
 client.login('TOKEN');

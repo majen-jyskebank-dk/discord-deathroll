@@ -10,7 +10,8 @@ interface ISetGold {
     gold: IUser['gold'];
 }
 
-interface IGiveHourlyGold {
+interface IGiveUsersGold {
+    condition: any;
     gold: IUser['gold'];
 }
 
@@ -28,12 +29,12 @@ async function SetGold({ userId, gold }: ISetGold): Promise<IUser> {
     return await User.findOneAndUpdate({ userId }, { gold }, { new: true });
 }
 
-async function GiveAllUsersGold({ gold }): Promise<any> {
-    await User.updateMany({}, { $inc: { gold }});
+async function GiveUsersGold({ condition, gold }: IGiveUsersGold): Promise<any> {
+    await User.updateMany(condition, { $inc: { gold }});
 }
 
 export default {
     FindOrCreate,
     SetGold,
-    GiveAllUsersGold,
+    GiveUsersGold,
 };

@@ -11,6 +11,6 @@ export class Bank implements ICommand {
             userId: message.author.id,
             userTag: message.author.toString(),
         });
-        message.channel.send(`${user.userTag}, you've got ${user.gold} in your bank.`);
+        message.channel.send(`${user.userTag}, you've got ${user.gold} gold in your bank.`);
     }
 }
