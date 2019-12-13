@@ -1,8 +1,10 @@
 import { ICommand } from './interfaces/command.interface';
 import mongoose from 'mongoose';
+import * as schedule from 'node-schedule';
 import * as Discord from 'discord.js';
 import * as path from 'path';
 import * as fs from 'fs';
+import UserContoller from './controllers/user.contoller';
 
 let db: mongoose.Connection;
 const client = new Discord.Client();
@@ -61,6 +63,11 @@ client.on('message', (message) => {
     if (commands.has(command)) {
         commands.get(command).execute(message, args);
     }
+});
+
+schedule.scheduleJob('0 * * * *', () => {
+    UserContoller.GiveAllUsersGold({ gold: 50 });
+    console.log('Gave all active users their hourly gold.');
 });
 
 client.login('TOKEN');
