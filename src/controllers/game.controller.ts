@@ -1,4 +1,4 @@
-import Game, { IGame } from '../model/game.model';
+import Game, { IGame } from '../models/game.model';
 
 interface ICreateGame {
     nextPlayer: IGame['nextPlayer'];

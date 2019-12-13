@@ -1,5 +1,4 @@
-import Channel, { IChannel } from '../model/channel.model';
-import { IUser } from '../model/user.model';
+import Channel, { IChannel } from '../models/channel.model';
 
 interface IFindOrCreate {
     channelId: IChannel['channelId'];

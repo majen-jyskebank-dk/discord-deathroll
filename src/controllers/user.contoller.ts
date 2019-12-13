@@ -1,4 +1,4 @@
-import User, { IUser } from '../model/user.model';
+import User, { IUser } from '../models/user.model';
 
 interface IFindOrCreate {
     userId: IUser['userId'];

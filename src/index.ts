@@ -5,10 +5,10 @@ import * as Discord from 'discord.js';
 import * as path from 'path';
 import * as fs from 'fs';
 import UserContoller from './controllers/user.contoller';
+import * as config from './config.json';
 
 let db: mongoose.Connection;
 const client = new Discord.Client();
-const dbPath = 'mongodb://localhost/discord-deathroll';
 const commands = new Map<string, ICommand>();
 const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter((file) => file.endsWith('.js'));
 
@@ -31,7 +31,7 @@ commandFiles.forEach((file, index) => {
     });
 });
 
-mongoose.connect(dbPath, {
+mongoose.connect(config.databasePath, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -70,7 +70,10 @@ client.on('message', (message) => {
 });
 
 schedule.scheduleJob('0 * * * * *', () => {
-    UserContoller.GiveUsersGold({ condition: { gold: { $lt: 500 } }, gold: 10 });
+    UserContoller.GiveUsersGold({
+        condition: { gold: { $lt: config.autoGold.giveToLessThan } },
+        gold: config.autoGold.amount,
+    });
 });
 
-client.login('TOKEN');
+client.login(config.discordToken);
