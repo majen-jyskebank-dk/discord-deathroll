@@ -52,8 +52,6 @@ export class Roll implements ICommand {
             if (!(channel.currentGame.nextPlayer.userId === message.author.id ||
                 channel.currentGame.currentPlayer.userId === message.author.id)) {
                 message.channel.send(`You're not part of the current game in this channel.`);
-                console.log(`Got ${message.author.id}, but expected either ${channel.currentGame.nextPlayer.userId} or ${channel.currentGame.currentPlayer.userId}`);
-
                 return;
             }
 
