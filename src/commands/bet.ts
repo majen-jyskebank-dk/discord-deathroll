@@ -38,6 +38,7 @@ export class Bet implements ICommand {
         const user = await UserController.FindOrCreate({
             userId: message.author.id,
             userTag: message.author.toString(),
+            userName: message.author.username,
         });
 
         if (user.gold < betAmount) {

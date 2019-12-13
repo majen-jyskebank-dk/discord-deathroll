@@ -10,6 +10,7 @@ export class Bank implements ICommand {
         const user = await UserController.FindOrCreate({
             userId: message.author.id,
             userTag: message.author.toString(),
+            userName: message.author.username,
         });
         message.channel.send(`${user.userTag}, you've got ${user.gold} gold in your bank.`);
     }
