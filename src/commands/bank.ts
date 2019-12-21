@@ -1,6 +1,6 @@
 import { ICommand } from '../interfaces/command.interface';
 import { Message } from 'discord.js';
-import UserController from '../controllers/user.contoller';
+import UserController from '../controllers/user.controller';
 
 export class Bank implements ICommand {
     public name = 'bank';

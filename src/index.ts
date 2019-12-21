@@ -4,7 +4,7 @@ import * as schedule from 'node-schedule';
 import * as Discord from 'discord.js';
 import * as path from 'path';
 import * as fs from 'fs';
-import UserContoller from './controllers/user.contoller';
+import UserController from './controllers/user.controller';
 import * as config from './config.json';
 
 let db: mongoose.Connection;
@@ -70,7 +70,7 @@ client.on('message', (message) => {
 });
 
 schedule.scheduleJob('0 * * * * *', () => {
-    UserContoller.GiveUsersGold({
+    UserController.GiveUsersGold({
         condition: { gold: { $lt: config.autoGold.giveToLessThan } },
         gold: config.autoGold.amount,
     });

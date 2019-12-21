@@ -1,6 +1,6 @@
 import { ICommand } from '../interfaces/command.interface';
 import { Message } from 'discord.js';
-import User from '../controllers/user.contoller';
+import User from '../controllers/user.controller';
 
 export class Scoreboard implements ICommand {
     public name = 'scoreboard';
