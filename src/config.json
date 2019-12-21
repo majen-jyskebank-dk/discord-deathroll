@@ -1,8 +1,0 @@
-{
-    "discordToken": "TOKEN",
-    "databasePath": "mongodb://localhost/discord-deathrole",
-    "autoGold": {
-        "giveToLessThan": 500,
-        "amount": 10
-    }
-}
