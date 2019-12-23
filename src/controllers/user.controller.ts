@@ -1,5 +1,9 @@
 import User, { IUser } from '../models/user.model';
 
+interface IFind {
+    userTag: IUser['userTag'];
+}
+
 interface IFindOrCreate {
     userId: IUser['userId'];
     userTag: IUser['userTag'];
@@ -22,6 +26,10 @@ interface IGiveUsersGold {
     gold: IUser['gold'];
 }
 
+async function Find({ userTag }: IFind): Promise<IUser> {
+    return await User.findOne({ userTag }).exec();
+}
+
 async function FindOrCreate({ userId, userTag, userName }: IFindOrCreate): Promise<IUser> {
     let user: IUser = await User.findOne({ userId }).exec();
 
@@ -38,6 +46,7 @@ async function FindOrCreate({ userId, userTag, userName }: IFindOrCreate): Promi
 }
 
 async function SetGold({ userId, gold }: ISetGold): Promise<IUser> {
+    console.log(`Setting gold to ${gold}`);
     return await User.findOneAndUpdate({ userId }, { gold }, { new: true });
 }
 
@@ -55,6 +64,7 @@ async function GetUsersOrderByGold(): Promise<IUser[]> {
 }
 
 export default {
+    Find,
     FindOrCreate,
     SetGold,
     GivePrice,
