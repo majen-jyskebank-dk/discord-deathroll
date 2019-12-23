@@ -46,7 +46,6 @@ async function FindOrCreate({ userId, userTag, userName }: IFindOrCreate): Promi
 }
 
 async function SetGold({ userId, gold }: ISetGold): Promise<IUser> {
-    console.log(`Setting gold to ${gold}`);
     return await User.findOneAndUpdate({ userId }, { gold }, { new: true });
 }
 
