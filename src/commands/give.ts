@@ -13,7 +13,7 @@ export class Give implements ICommand {
         }
 
         if (isNaN(+args[1])) {
-            message.channel.send(`${message.author.toString()}, please specify how much gold you want to give (${args[0]} is not a valid number).`);
+            message.channel.send(`${message.author.toString()}, please specify how much gold you want to give (${args[1]} is not a valid number).`);
             return;
         }
 
